@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <style>
+    body {
+      background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+      color: #000;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s;
+      background-size: 200% auto;
+    }
+    body:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+    }
+    .container {
+      height: 400px;
+      width: 650px;
+      padding: 13px;
+      padding-right: 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background-image: linear-gradient(to right, #517fa4 0%, #243949  51%, #517fa4  100%);
+      margin: 10px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color: white;            
+     
+      border-radius: 10px;
+      display: block;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .container:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+      }
+
+      h1{
+        font-size: 30px;
+        margin-bottom: 10px;
+        color: #7474BF 0%, #348AC7  51%, #7474BF  100%;
+        
+      }  
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+    }
+    .box {
+      position: relative;
+      width: 390px;
+      height: 440px;
+      background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+  }
+  .box2 {
+      position: relative;
+      width: 390px;
+      height: 440px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+  }
+  .box2::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      background-image: conic-gradient(transparent,transparent,transparent,#d400d4);
+      animation: animate 4s linear infinite;
+      animation-delay: -2s;
+  }
+  
+  .box::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 800px;
+      background-image: conic-gradient(transparent,transparent,transparent,#ddf21f);
+      animation: animate 4s linear infinite;
+  }
+  
+  
+  @keyframes animate {
+      0% {
+          transform: rotate(0deg);
+      }
+      100% {
+          transform: rotate(360deg);
+      }
+  }
+  .box span {
+      position: absolute;
+      inset: 5px;
+      border-radius: 16px;
+      background: #0c1022;
+      z-index: 1;
+  }
+  input,
+  textarea,
+  select {
+    margin: 10px 1px 0 2px;
+    width: 100%;
+    min-height: 2em;
+    color:black;
+    background-color: white;
+  }
+  .btn-grad {
+    background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+    margin: 20px;
+    padding: 7px 6px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    border-color: #000;
+    border-radius: 10px;
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: auto;
+    width: 10em;
+    height: 2.5em;
+    
+    
+    }
+  
+    .btn-grad:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    }
+    .foot {
+      background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%);
+      margin: 10px 10px;
+      padding: 15px 100px;
+      text-align: center;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+      color:  #7474BF 0%, #348AC7  51%, #7474BF  100%;            
+      border-radius: 5px;
+      display: block;
+      font-size: 10px;
+      box-shadow: 5px 5px 10px black;
+      outline: none;
+      align-items: center;
+      position: absolute;
+      bottom: 0%;
+      width: 100%;
+      height: 1.5rem;
+      margin-bottom: auto;
+      }
+      .foot:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #fff;
+      text-decoration: none;
+      }
+  </style>
+</head>
+<body>
+  <div  class="box">
+		<div class="box2">
+  <div class = "container">
+    <h1>Register</h1>
+    <form action="/register" method="POST">
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <input type="submit" value="Register">
+    </form>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+</div>
+</div>
+</body>
+<footer class="foot">
+	Created by : @Group Kyle
+</footer>
+</html>

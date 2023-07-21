@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <style>
+    .completed-task {
+      text-decoration: line-through;
+
+    }
+    
+    *{
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      box-sizing: border-box;
+    }
+    body{
+      background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+      color: #000;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.5s;
+      background-size: 200% auto;
+      width: 100%;
+      
+      
+      margin: 0; /* Remove default body margin */
+      padding: 0; /* Remove default body padding */
+      display: flex;
+    justify-content: center; /* Horizontally center the form */
+    align-items: center; /* Vertically center the form */
+    min-height: 100vh;
+    }
+    body:hover {
+      background-position: right center; /* change the direction of the change here */
+      color: #000;
+      text-decoration: none;
+    }
+    .container{
+      padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    justify-content: center;
+    margin: auto;
+    }
+    
+    
+    .todo-app{
+      width: 100%;
+      max-width: 540px;
+      background: #fff;
+      margin: center;
+      padding: 40px 30px 70px;
+      border-radius: 10px;
+    }
+    .todo-app h2{
+      color: #002765;
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .row{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #edeef0;
+      border-radius: 30px;
+      padding-left: 20px;
+      margin-bottom: 25px;
+    }
+    input{
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 10px;
+    }
+    button{
+      border: none;
+      outline: none;
+      padding: 8px 25px;
+      background: #5C7CFA;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 40px;
+      left: 20px;
+      text-align: center;
+    }
+    ul li{
+      list-style: none;
+      font-size: 17px;
+      padding: 12px 8px 12px 50px;
+      user-select: none;
+      cursor: pointer;
+      position: relative;
+    }
+    ul li::before{
+      content: '';
+      position: absolute;
+      height: 28px;
+      width: 28px;
+      border-radius: 50%;
+      background-image:url(icons8-check-mark-48.png);
+      background-size: cover;
+      background-position: center;
+      top: 12px;
+      left: 8px;
+
+    }
+    .del{
+      border-radius: 30px;
+      padding-left: 20px;
+      justify-content: space-between;
+      text-align: center;
+    }
+    .out {
+     margin-bottom: auto;
+     margin-left: auto auto auto auto;
+  }
+  .foot {
+    background-image: linear-gradient(to right, #7474BF 0%, #348AC7  51%, #7474BF  100%);
+    margin: 10px 10px;
+    padding: 15px 100px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color:  #7474BF 0%, #348AC7  51%, #7474BF  100%;            
+    border-radius: 5px;
+    display: block;
+    font-size: 10px;
+    box-shadow: 5px 5px 10px black;
+    outline: none;
+    align-items: center;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 1.5rem;
+    margin-bottom: auto;
+    }
+    .foot:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class = 'container'>
+    <div class = 'todo-app'>
+  <p><strong>Welcome, <%= session.username %>!</strong></p> <!-- Display the logged-in username -->
+  
+  <h1>To-Do List</h1>
+  <div class = 'row'>
+    <form action="/addTask" method="post">
+      <input type="text" name="task" placeholder="Add" required>
+      <button class = 'addbtn' type="submit">Add Task</button>
+    </form>
+</div>
+
+  <!-- ... -->
+<ul id="list">
+  <% for (const todo of todos) { %>
+    <li>
+      <span <% if (todo.completed === 1) { %>class="completed-task"<% } %>><%= todo.task %> </span>
+      <p>
+        <form id="updateForm_<%= todo.id %>" action="/updateTaskCompletion" method="post" style="display: inline;">
+          <input type="hidden" name="taskId" value="<%= todo.id %>">
+          <p><%= todo.id + ' ' + todo.username + ' ' + todo.task + ' ' + todo.completed %></p>
+          <input type="hidden" name="completed" value="<%= todo.completed === 1 ? 1 : 0 %>">
+          <input type="checkbox" name="updateCheckbox" onchange="submitUpdateForm(<%= todo.id %>)" <%= todo.completed === 1 ? 'checked' : '' %>>
+          <button class="del" type="button" onclick="submitUpdateForm(<%= todo.id %>)">Update</button>
+        </form>
+        <form action="/deleteTask" method="post" style="display: inline;">
+          <input type="hidden" name="taskId" value="<%= todo.id %>">
+          <button class="del" type="submit">Delete</button>
+        </form>
+      </p>
+    </li>
+    
+  <% } %>
+</ul>
+
+<script>
+  function submitUpdateForm(todoId) {
+    const checkbox = document.querySelector(`#updateForm_${todoId} input[name="updateCheckbox"]`);
+    const hiddenInput = document.querySelector(`#updateForm_${todoId} input[name="completed"]`);
+    hiddenInput.value = checkbox.checked ? 1 : 0;
+    const updateForm = document.getElementById(`updateForm_${todoId}`);
+    updateForm.submit();
+  }
+</script>
+</div>
+</div>
+<div class = 'out'>
+
+<a href="/login">
+  <button class = 'out' type="submit">Log Out</button>
+</a>
+</div>
+</body>
+<footer class="foot">
+	Created by : @Group Kyle
+</footer>
+</html>
+

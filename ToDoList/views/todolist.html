@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+</head>
+<body>
+  <h1>To-Do List</h1>
+  <form action="/addTask" method="post">
+    <input type="text" name="task" placeholder="Task" required>
+    <button type="submit">Add Task</button>
+  </form>
+  <ul id="list">
+    <% for (const todo of todos) { %>
+      <li>
+        <span><%= todo.task %> - <%= todo.username %></span>
+        <p>
+          <form action="/updateTaskCompletion" method="post" style="display: inline;">
+            <input type="hidden" name="taskId" value="<%= todo.id %>">
+            <input type="checkbox" name="completed" <%= todo.completed ? 'checked' : '' %>>
+            <button type="submit">Update</button>
+          </form>
+          <form action="/deleteTask" method="post" style="display: inline;">
+            <input type="hidden" name="taskId" value="<%= todo.id %>">
+            <button type="submit">Delete</button>
+          </form>
+        </p>
+      </li>
+    <% } %>
+  </ul>
+  <!-- Rest of your JavaScript code -->
+</body>
+</html>
